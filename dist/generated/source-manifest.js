@@ -96,6 +96,103 @@ var e = {
 			}
 		},
 		{
+			id: "content.newsnight-lower-third",
+			displayName: "Newsnight Lower Third",
+			group: "content",
+			section: "custom",
+			source: "static",
+			sourceId: "flow-components-test",
+			version: "1.0.0",
+			renderable: !0,
+			tags: [
+				"content",
+				"newsnight",
+				"broadcast",
+				"lower-third",
+				"producer"
+			],
+			sourcePath: "src/groups/content/newsnight-lower-third",
+			contentHash: "sha256:26b5456547dedb56fbbdc8cd137c76bc5fa577c3c881a19960d230d5b22340de",
+			fixtureVariants: [{
+				id: "default",
+				label: "Lower-third preview"
+			}],
+			stateSupport: {
+				empty: { notApplicable: "Lower third always renders from configured copy." },
+				loading: { notApplicable: "Lower third has no component-owned async operation." },
+				error: { notApplicable: "Lower third has no component-owned fallible runtime operation." },
+				disabled: { notApplicable: "Lower third is display-only." },
+				focus: { notApplicable: "Lower third has no focusable renderer controls." },
+				keyboard: { notApplicable: "Lower third exposes no keyboard interaction." },
+				responsive: !0
+			}
+		},
+		{
+			id: "content.newsnight-masthead",
+			displayName: "Newsnight Masthead",
+			group: "content",
+			section: "custom",
+			source: "static",
+			sourceId: "flow-components-test",
+			version: "1.0.0",
+			renderable: !0,
+			tags: [
+				"content",
+				"newsnight",
+				"masthead",
+				"broadcast",
+				"ticker"
+			],
+			sourcePath: "src/groups/content/newsnight-masthead",
+			contentHash: "sha256:0b36b75559a02908ab0e132a9c1dec0a2505485d6a50b82d7b79a6477a094b4b",
+			fixtureVariants: [{
+				id: "default",
+				label: "Broadcast masthead"
+			}],
+			stateSupport: {
+				empty: { notApplicable: "Masthead always renders from configured broadcast copy." },
+				loading: { notApplicable: "Masthead has no component-owned async operation." },
+				error: { notApplicable: "Masthead has no component-owned fallible runtime operation." },
+				disabled: { notApplicable: "Masthead is display-only." },
+				focus: { notApplicable: "Masthead has no focusable renderer controls." },
+				keyboard: { notApplicable: "Masthead exposes no keyboard interaction." },
+				responsive: !0
+			}
+		},
+		{
+			id: "content.newsnight-results-wall",
+			displayName: "Newsnight Results Wall",
+			group: "content",
+			section: "custom",
+			source: "static",
+			sourceId: "flow-components-test",
+			version: "1.0.0",
+			renderable: !0,
+			tags: [
+				"content",
+				"newsnight",
+				"results",
+				"broadcast",
+				"election",
+				"dashboard"
+			],
+			sourcePath: "src/groups/content/newsnight-results-wall",
+			contentHash: "sha256:78d21e8f9af4265d2fc3486db34b3a7d67b53ceb5b260841600d2f3dcb7b067b",
+			fixtureVariants: [{
+				id: "default",
+				label: "Newsroom results wall"
+			}],
+			stateSupport: {
+				empty: { notApplicable: "Results wall ships with configured demo data." },
+				loading: { notApplicable: "Results wall has no component-owned async operation." },
+				error: { notApplicable: "Results wall has no component-owned fallible runtime operation." },
+				disabled: { notApplicable: "Results wall is display-only." },
+				focus: { notApplicable: "Results wall has no focusable renderer controls." },
+				keyboard: { notApplicable: "Results wall exposes no keyboard interaction." },
+				responsive: !0
+			}
+		},
+		{
 			id: "content.status-badge",
 			displayName: "Status Badge",
 			group: "content",
@@ -147,12 +244,15 @@ var e = {
 		componentIds: [
 			"demo.demo-button",
 			"demo.demo-text",
+			"content.newsnight-lower-third",
+			"content.newsnight-masthead",
+			"content.newsnight-results-wall",
 			"content.status-badge"
 		]
 	}],
 	fingerprints: {
-		manifestHash: "sha256:d8982c1981122510a2519c6ef900768feffa4e3f221198112119a66d5e76c22c",
-		filesHash: "sha256:ec49163a44a54f6a102138d1ec5214133d40a27fe4628eeb0410adec3adc8672"
+		manifestHash: "sha256:3c2c2cdd65277600b427783459c987bd814a943925e491396f3b5c672482d832",
+		filesHash: "sha256:2be54f5d168fb2fbf0ce5a81efd63ecc0251710419b2f181719016c1163e621f"
 	}
 };
 //#endregion

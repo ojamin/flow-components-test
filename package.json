@@ -61,7 +61,7 @@
     "check:fast": "npm run validate && npm run policy:standalone && npm run typecheck",
     "check:standalone": "npm run generate:check && npm run validate && npm run prove:definition-loader && npm run policy:standalone && npm run audit:prod && npm run typecheck && npm run test:components && npm run build && npm run preview:build && npm run pack:dry-run && npm run smoke:packed-consumer && npm run smoke:git-ref-consumer",
     "check:release": "npm run check:standalone",
-    "test:components": "vitest run --config vitest.config.js src/groups/content/button src/groups/content/status-badge src/groups/content/text src/sdk/__tests__/helper-exports.test.ts src/sdk/__tests__/browser-helpers.test.ts src/sdk/__tests__/validate-component.test.ts --maxWorkers=4",
+    "test:components": "vitest run --config vitest.config.js src/groups/content/button src/groups/content/newsnight-lower-third src/groups/content/newsnight-masthead src/groups/content/newsnight-results-wall src/groups/content/status-badge src/groups/content/text src/sdk/__tests__/helper-exports.test.ts src/sdk/__tests__/browser-helpers.test.ts src/sdk/__tests__/validate-component.test.ts --maxWorkers=4",
     "test:sdk": "vitest run --config vitest.config.js src/sdk/__tests__/helper-exports.test.ts src/sdk/__tests__/browser-helpers.test.ts src/sdk/__tests__/validate-component.test.ts --maxWorkers=4",
     "test:sdk:fast": "npm run test:sdk",
     "test:groups": "vitest run --config vitest.config.js src/groups/content/button src/groups/content/status-badge src/groups/content/text --maxWorkers=4",

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "content.newsnight-results-wall",
+  "displayName": "Newsnight Results Wall",
+  "group": "content",
+  "section": "custom",
+  "tags": [
+    "content",
+    "newsnight",
+    "results",
+    "broadcast",
+    "election",
+    "dashboard"
+  ],
+  "version": "1.0.0",
+  "renderable": true,
+  "fixtureVariants": [
+    {
+      "id": "default",
+      "label": "Newsroom results wall"
+    }
+  ],
+  "stateSupport": {
+    "empty": {
+      "notApplicable": "Results wall ships with configured demo data."
+    },
+    "loading": {
+      "notApplicable": "Results wall has no component-owned async operation."
+    },
+    "error": {
+      "notApplicable": "Results wall has no component-owned fallible runtime operation."
+    },
+    "disabled": {
+      "notApplicable": "Results wall is display-only."
+    },
+    "focus": {
+      "notApplicable": "Results wall has no focusable renderer controls."
+    },
+    "keyboard": {
+      "notApplicable": "Results wall exposes no keyboard interaction."
+    },
+    "responsive": true
+  },
+  "transformKind": "passthrough",
+  "entry": {
+    "definition": "component.ts",
+    "renderer": "Renderer.vue",
+    "configPanel": "ConfigPanel.vue"
+  }
+}

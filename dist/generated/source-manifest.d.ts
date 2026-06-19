@@ -97,6 +97,44 @@ export declare const staticComponentSourceManifest: {
         tags: string[];
         sourcePath: string;
         contentHash: string;
+        fixtureVariants: {
+            id: string;
+            label: string;
+        }[];
+        stateSupport: {
+            empty: {
+                notApplicable: string;
+            };
+            loading: {
+                notApplicable: string;
+            };
+            error: {
+                notApplicable: string;
+            };
+            disabled: {
+                notApplicable: string;
+            };
+            focus: {
+                notApplicable: string;
+            };
+            keyboard: {
+                notApplicable: string;
+            };
+            responsive: true;
+        };
+        responsiveDefaults?: undefined;
+    } | {
+        id: string;
+        displayName: string;
+        group: "content";
+        section: string;
+        source: "static";
+        sourceId: string;
+        version: string;
+        renderable: true;
+        tags: string[];
+        sourcePath: string;
+        contentHash: string;
         fixtureVariants: ({
             id: string;
             label: string;

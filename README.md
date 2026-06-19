@@ -36,6 +36,9 @@ npm run build
 ## Demo components
 
 - `src/groups/content/button/` — `demo.demo-button`, an interactive button demo with event/output patterns.
+- `src/groups/content/newsnight-lower-third/` — `content.newsnight-lower-third`, a broadcast lower-third preview component.
+- `src/groups/content/newsnight-masthead/` — `content.newsnight-masthead`, a live newsroom masthead and ticker component.
+- `src/groups/content/newsnight-results-wall/` — `content.newsnight-results-wall`, a full election night results wall component.
 - `src/groups/content/status-badge/` — `content.status-badge`, a compact status badge test component with bindable label/value config.
 - `src/groups/content/text/` — `demo.demo-text`, a simple passthrough text demo.
 

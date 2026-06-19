@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "content.newsnight-masthead",
+  "displayName": "Newsnight Masthead",
+  "group": "content",
+  "section": "custom",
+  "tags": [
+    "content",
+    "newsnight",
+    "masthead",
+    "broadcast",
+    "ticker"
+  ],
+  "version": "1.0.0",
+  "renderable": true,
+  "fixtureVariants": [
+    {
+      "id": "default",
+      "label": "Broadcast masthead"
+    }
+  ],
+  "stateSupport": {
+    "empty": {
+      "notApplicable": "Masthead always renders from configured broadcast copy."
+    },
+    "loading": {
+      "notApplicable": "Masthead has no component-owned async operation."
+    },
+    "error": {
+      "notApplicable": "Masthead has no component-owned fallible runtime operation."
+    },
+    "disabled": {
+      "notApplicable": "Masthead is display-only."
+    },
+    "focus": {
+      "notApplicable": "Masthead has no focusable renderer controls."
+    },
+    "keyboard": {
+      "notApplicable": "Masthead exposes no keyboard interaction."
+    },
+    "responsive": true
+  },
+  "transformKind": "passthrough",
+  "entry": {
+    "definition": "component.ts",
+    "renderer": "Renderer.vue",
+    "configPanel": "ConfigPanel.vue"
+  }
+}

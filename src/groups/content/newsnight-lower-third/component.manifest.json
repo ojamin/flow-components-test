@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "content.newsnight-lower-third",
+  "displayName": "Newsnight Lower Third",
+  "group": "content",
+  "section": "custom",
+  "tags": [
+    "content",
+    "newsnight",
+    "broadcast",
+    "lower-third",
+    "producer"
+  ],
+  "version": "1.0.0",
+  "renderable": true,
+  "fixtureVariants": [
+    {
+      "id": "default",
+      "label": "Lower-third preview"
+    }
+  ],
+  "stateSupport": {
+    "empty": {
+      "notApplicable": "Lower third always renders from configured copy."
+    },
+    "loading": {
+      "notApplicable": "Lower third has no component-owned async operation."
+    },
+    "error": {
+      "notApplicable": "Lower third has no component-owned fallible runtime operation."
+    },
+    "disabled": {
+      "notApplicable": "Lower third is display-only."
+    },
+    "focus": {
+      "notApplicable": "Lower third has no focusable renderer controls."
+    },
+    "keyboard": {
+      "notApplicable": "Lower third exposes no keyboard interaction."
+    },
+    "responsive": true
+  },
+  "transformKind": "passthrough",
+  "entry": {
+    "definition": "component.ts",
+    "renderer": "Renderer.vue",
+    "configPanel": "ConfigPanel.vue"
+  }
+}

@@ -1,12 +1,18 @@
 import { componentDefinition as e } from "../groups/content/button/component.js";
 import { componentDefinition as t } from "../groups/content/text/component.js";
-import { componentDefinition as n } from "../groups/content/status-badge/component.js";
+import { componentDefinition as n } from "../groups/content/newsnight-lower-third/component.js";
+import { componentDefinition as r } from "../groups/content/newsnight-masthead/component.js";
+import { componentDefinition as i } from "../groups/content/newsnight-results-wall/component.js";
+import { componentDefinition as a } from "../groups/content/status-badge/component.js";
 //#region src/generated/catalog.ts
-var r = [
+var o = [
 	e,
 	t,
-	n
-], i = {
+	n,
+	r,
+	i,
+	a
+], s = {
 	groups: ["content"],
 	components: [
 		{
@@ -26,23 +32,47 @@ var r = [
 			sourceId: "flow-components-test"
 		},
 		{
+			id: "content.newsnight-lower-third",
+			group: "content",
+			title: "Newsnight Lower Third",
+			description: n.description,
+			source: "static",
+			sourceId: "flow-components-test"
+		},
+		{
+			id: "content.newsnight-masthead",
+			group: "content",
+			title: "Newsnight Masthead",
+			description: r.description,
+			source: "static",
+			sourceId: "flow-components-test"
+		},
+		{
+			id: "content.newsnight-results-wall",
+			group: "content",
+			title: "Newsnight Results Wall",
+			description: i.description,
+			source: "static",
+			sourceId: "flow-components-test"
+		},
+		{
 			id: "content.status-badge",
 			group: "content",
 			title: "Status Badge",
-			description: n.description,
+			description: a.description,
 			source: "static",
 			sourceId: "flow-components-test"
 		}
 	],
-	definitions: r
-}, a = r.map((e) => e.id);
-function o(e) {
-	return r.find((t) => t.id === e);
+	definitions: o
+}, c = o.map((e) => e.id);
+function l(e) {
+	return o.find((t) => t.id === e);
 }
-function s(e) {
-	let t = o(e);
+function u(e) {
+	let t = l(e);
 	if (!t) throw Error(`Unknown built-in component definition "${e}".`);
 	return t;
 }
 //#endregion
-export { o as getBuiltInComponentDefinition, s as requireBuiltInComponentDefinition, r as staticComponentDefinitions, i as staticComponentPackageCatalog, a as staticComponentPackageDefinitionIds };
+export { l as getBuiltInComponentDefinition, u as requireBuiltInComponentDefinition, o as staticComponentDefinitions, s as staticComponentPackageCatalog, c as staticComponentPackageDefinitionIds };
