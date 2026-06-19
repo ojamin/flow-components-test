@@ -50,10 +50,10 @@ export function createSourceManifest({
   return {
     schemaVersion: 1,
     sourceId: componentSourceId,
-    name: "Flow Components Test",
+    name: "Newsnight Components",
     version: packageVersion,
     generatedAt: "1970-01-01T00:00:00.000Z",
-    packageName: "@flow-builder/components",
+    packageName: "@flow-builder/newsnight-components",
     components: componentSummaries,
     groups: groupSummaries,
     fingerprints: {

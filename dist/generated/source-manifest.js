@@ -2,10 +2,10 @@
 var e = {
 	schemaVersion: 1,
 	sourceId: "flow-components-test-newsnight",
-	name: "Flow Components Test",
+	name: "Newsnight Components",
 	version: "0.5.0",
 	generatedAt: "1970-01-01T00:00:00.000Z",
-	packageName: "@flow-builder/components",
+	packageName: "@flow-builder/newsnight-components",
 	components: [
 		{
 			id: "demo.demo-button",
