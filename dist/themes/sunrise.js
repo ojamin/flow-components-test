@@ -1,0 +1,77 @@
+var e = {
+	version: 1,
+	id: "sunrise",
+	displayName: "Sunrise",
+	description: "Warm component theme with amber and coral accents.",
+	properties: {
+		color: {
+			pageBackground: "oklch(0.975 0.026 78)",
+			surface: "oklch(0.995 0.012 78)",
+			cardForeground: "oklch(0.24 0.04 45)",
+			popover: "oklch(0.995 0.012 78)",
+			popoverForeground: "oklch(0.24 0.04 45)",
+			surfaceMuted: "oklch(0.93 0.04 78)",
+			foreground: "oklch(0.24 0.04 45)",
+			foregroundMuted: "oklch(0.43 0.045 45)",
+			border: "oklch(0.84 0.05 70)",
+			accent: "oklch(0.68 0.19 45)",
+			accentForeground: "oklch(0.995 0.012 78)",
+			secondary: "oklch(0.91 0.04 78)",
+			secondaryForeground: "oklch(0.24 0.04 45)",
+			accentSubtle: "oklch(0.9 0.065 45)",
+			accentSubtleForeground: "oklch(0.39 0.13 45)",
+			focusRing: "oklch(0.7 0.18 35)",
+			destructive: "oklch(0.58 0.22 25)",
+			destructiveForeground: "oklch(0.995 0.012 78)",
+			input: "oklch(0.84 0.05 70)",
+			sidebar: "oklch(0.955 0.03 78)",
+			sidebarForeground: "oklch(0.24 0.04 45)",
+			sidebarPrimary: "oklch(0.68 0.19 45)",
+			sidebarPrimaryForeground: "oklch(0.995 0.012 78)",
+			sidebarAccent: "oklch(0.9 0.065 45)",
+			sidebarAccentForeground: "oklch(0.39 0.13 45)",
+			sidebarBorder: "oklch(0.84 0.05 70)",
+			sidebarRing: "oklch(0.7 0.18 35)",
+			warning: "oklch(0.79 0.17 78)",
+			info: "oklch(0.58 0.16 230)",
+			success: "oklch(0.6 0.16 150)",
+			chart1: "oklch(0.68 0.19 45)",
+			chart2: "oklch(0.74 0.16 82)",
+			chart3: "oklch(0.62 0.18 22)",
+			chart4: "oklch(0.62 0.16 170)",
+			chart5: "oklch(0.58 0.18 300)"
+		},
+		font: {
+			body: "Inter, ui-sans-serif, system-ui, sans-serif",
+			heading: "Plus Jakarta Sans, Inter, ui-sans-serif, system-ui, sans-serif",
+			mono: "JetBrains Mono, ui-monospace, SFMono-Regular, monospace"
+		},
+		radius: {
+			none: "0",
+			sm: "0.25rem",
+			md: "0.625rem",
+			lg: "1rem",
+			xl: "1.25rem",
+			full: "9999px"
+		},
+		spacing: {
+			none: "0",
+			sm: "0.5rem",
+			md: "1rem",
+			lg: "1.75rem",
+			xl: "2.25rem"
+		},
+		motion: {
+			durationFastMs: 125,
+			durationNormalMs: 250,
+			easing: "cubic-bezier(0.22, 1, 0.36, 1)"
+		},
+		shadow: {
+			sm: "0 1px 2px rgb(120 53 15 / 0.10)",
+			md: "0 10px 28px rgb(120 53 15 / 0.12)",
+			lg: "0 24px 64px rgb(120 53 15 / 0.16)"
+		}
+	}
+};
+//#endregion
+export { e as default };

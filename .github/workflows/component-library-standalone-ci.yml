@@ -1,0 +1,227 @@
+# Future standalone private-repository workflow for @flow-builder/components.
+#
+# This file is intentionally staged under packages/components/.github/workflows in
+# the monorepo so GitHub does not treat it as an active root workflow today.
+# Copy it to .github/workflows/component-library-standalone-ci.yml at the root of
+# the future private flow-builder-components repository.
+
+name: Component Library Standalone CI
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+      - "release/**"
+  push:
+    branches:
+      - main
+      - develop
+      - "release/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: component-library-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CI: "1"
+  # Enforce the package policy at install time: standalone CI must use the
+  # runner-provided Playwright/Chrome installation and must not download browser
+  # binaries during `npm ci` or later Playwright invocations.
+  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
+
+jobs:
+  install:
+    name: Component Library / install
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install from lockfile
+        run: npm ci
+
+  generated-output-and-manifest-validation:
+    name: Component Library / generated-output-and-manifest-validation
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install from lockfile
+        run: npm ci
+      - name: Generated catalog/source manifest is fresh
+        run: npm run generate:check
+      - name: Validate manifests and source contracts
+        run: npm run validate
+
+  definition-loader:
+    name: Component Library / definition-loader
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install from lockfile
+        run: npm ci
+      - name: Prove Vite SSR definition loader
+        run: npm run prove:definition-loader
+
+  typecheck:
+    name: Component Library / typecheck
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install from lockfile
+        run: npm ci
+      - name: Typecheck package and preview app
+        run: npm run typecheck:package && npm run typecheck:preview
+
+  tests:
+    name: Component Library / tests
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install from lockfile
+        run: npm ci
+      - name: Audit split test lane coverage
+        run: npm run test:components:lanes:audit
+      - name: Run SDK and component group tests
+        run: npm run test:components
+
+  preview-build:
+    name: Component Library / preview-build
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install from lockfile
+        run: npm ci
+      - name: Build package preview app
+        run: npm run preview:build
+
+  package-build-and-pack:
+    name: Component Library / package-build-and-pack
+    runs-on: ubuntu-latest
+    needs:
+      - generated-output-and-manifest-validation
+      - typecheck
+      - tests
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install from lockfile
+        run: npm ci
+      - name: Build package outputs
+        run: npm run build
+      - name: Dry-run package tarball
+        run: npm run pack:dry-run
+      - name: Packed consumer smoke placeholder
+        run: |
+          node -e "const scripts=require('./package.json').scripts||{}; if (!scripts['smoke:packed-consumer']) console.log('smoke:packed-consumer is not implemented yet; add it before enabling packed consumer proof as a required check.');"
+          if node -e "process.exit((require('./package.json').scripts||{})['smoke:packed-consumer'] ? 0 : 1)"; then
+            npm run smoke:packed-consumer
+          fi
+
+  security-and-standalone-policy:
+    name: Component Library / security-and-standalone-policy
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install from lockfile
+        run: npm ci
+      - name: Production dependency audit
+        run: npm run audit:prod
+      - name: Lifecycle script allowlist
+        run: npm run policy:lifecycle
+      - name: Export map and group path guard
+        run: npm run policy:exports
+      - name: Dependency declaration guard
+        run: npm run policy:deps
+      - name: Package import boundary guard
+        run: npm run policy:imports
+      - name: Secret, fixture, and path privacy guard
+        run: npm run policy:privacy
+      - name: Static-export source hook guard
+        run: npm run policy:static-export-hooks
+      - name: Combined standalone policy gate
+        run: npm run policy:standalone
+
+  visual-state-regression-contract:
+    name: Component Library / visual-state-regression-contract
+    runs-on: ubuntu-latest
+    needs:
+      - preview-build
+      - package-build-and-pack
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install from lockfile
+        run: npm ci
+      - name: Enforce visual/state lane contract
+        run: |
+          # System Chrome is preinstalled on AIC-style runners at this path.
+          # Override via PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH when the runner
+          # ships Chrome at a different location. The lane MUST NOT call
+          # `playwright install` or download browser binaries.
+          if node -e "process.exit((require('./package.json').scripts||{})['test:visual-state'] ? 0 : 1)"; then
+            npm run test:visual-state
+          else
+            echo "Required: package must expose test:visual-state using only AIC-provided Playwright/Chrome (no playwright install, no browser downloads)." >&2
+            exit 1
+          fi

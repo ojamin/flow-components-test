@@ -1,0 +1,27 @@
+# @flow-builder/components Guardrails
+
+- This package is a proprietary standalone demo component-source repository for Flow Builder.
+- Keep demo component IDs and exported contracts stable; do not move app component implementations into this package outside an assigned component-source slice.
+- Package code must stay independent from app stores, router, pages, and app-shell UI.
+- Runtime services must be exposed through SDK/facade boundaries rather than importing app internals.
+- Production component files must use SDK helpers such as `@flow-builder/components/sdk/browser` for browser capabilities/effects instead of direct `window`/`document`/`navigator`/timer/RAF globals, and must not call `configure*Service()` runtime-service setup APIs.
+- Generic component/group-local helper modules are forbidden unless they are explicitly allowlisted in the package helper-boundary policy with a narrow rationale and removal condition; prefer shared SDK helper subpaths documented in `packages/components/docs/sdk-helpers.md`.
+- Component renderers, package component pages, preview examples, and config panels are package-owned UI surfaces: they may intentionally diverge from app/editor chrome, but must preserve component theme/runtime contracts, accessibility, static-export compatibility, and package docs quality gates.
+- Component renderers and config panels must use Tailwind utility classes only and compose shadcn-vue UI through package facades; do not add inline styles, Vue SFC style blocks, ad hoc CSS, host app UI imports, or parallel component-UI bridges.
+- Components must document and verify DS-008/DS-016/card/AI-slop expectations, component-theme behavior, empty, loading, error, disabled, focus, keyboard, responsive, fixture-state, and interactive states where relevant, with accessible labels, keyboard paths, and non-color-only status communication.
+- Treat external components as executable code. Preserve trust levels `trusted` and `review-required`, update modes `pinned`, `auto-check`, `auto-apply`, and `manual`, and keep `auto-apply` allowed only for trusted sources.
+- Mutable refs are review-required by default; content/hash mismatches must block silent use and produce diagnostics until repaired by reconnecting, pulling a trusted update, or switching to a known-good snapshot/source.
+- Never persist credentials, tokens, browser handles, or absolute local paths in project JSON; embedded snapshots must strip `.git`, hidden files, `node_modules`, env files, credentials, local absolute paths, unrelated files, and unsafe display-label path fragments.
+- Static export must use materialized/compiled preview-export runtime components. Raw embedded Vue/TS/project JSON source is not runtime-executable, and missing materialized external components must block export with clear diagnostics.
+- Stronger sandboxing for untrusted component execution is not claimed; do not claim complete untrusted-code sandbox guarantees, runtime compilation in exported sites, marketplace behavior, or browser Git behavior without an assigned implementation slice.
+- Classify dependencies as peers when the host app must provide a singleton runtime such as Vue; use dependencies for package-owned runtime libraries; use devDependencies only for package-local tooling.
+- Keep preview app code under `preview-app/` and use package public facades such as `@flow-builder/components/catalog`, `source-manifest`, `sdk`, and `component-ui`.
+- Do not import host app stores, host router modules, pages, app-shell internals, or other host-only implementation details into preview app code.
+- `packages/components/src/sdk/component-ui.ts` is the package-owned UI/config facade for shadcn/config primitives; do not add parallel bridges or host-app UI imports.
+- Keep preview app scripts and checks documented, including `preview:dev`, `preview:build`, and package component tests included by `test:components`.
+- Keep package-local docs standalone-correct: contributors must be able to use Node.js `>=22.0.0`, npm `10.9.4`, the standalone package lockfile, `npm ci`, and package scripts such as `generate:check`, `validate`, `typecheck`, `test:components`, `policy:standalone`, `audit:prod`, `check:standalone`, `build`, `pack:dry-run`, `smoke:packed-consumer`, `smoke:git-ref-consumer`, `preview:dev`, and `preview:build` from the repository root without parent app source.
+- Mark root/app integration commands as optional host proof with `test:app-integration:*`; do not present root app checks, root app source paths, app stores/router/persistence internals, or root design-system dependencies as required for package-local work.
+- Future package visual lanes must use the AIC-provided Playwright/Chrome installation; do not run `playwright install` or download browsers into the repo/package/Playwright directories.
+- Use the package documentation set under `packages/components/docs/` as the first stop for component authoring, contracts, manifests, renderer/config/transform/runtime work, tests, design-system and accessibility expectations, release notes, migration, forking/overrides, and agent handoffs.
+- For package component Config UI changes, use `docs/component-config-proof.md` for the copy/pasteable proof ladder instead of duplicating that procedure here.
+- Keep `README.md` navigation in sync when adding, renaming, or retiring package docs.

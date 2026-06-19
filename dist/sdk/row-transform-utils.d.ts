@@ -1,0 +1,26 @@
+import type { JsonObject, JsonValue } from "./schema-primitives.js";
+import { type RowAggregateOperation } from "./row-transform-engine-types.js";
+export declare function resolveObjectRows(data: JsonValue | undefined, rowsPath: string): JsonObject[];
+export declare function setOutputField(output: JsonObject, field: string, value: JsonValue, configPath: string): void;
+export declare function cloneRowWithOutputField(row: JsonObject, field: string, value: JsonValue, configPath: string): JsonObject;
+export declare function validateOutputField(field: string, configPath: string): string;
+export declare function validateDerivedOutputField(sourceField: string, configPath: string): string;
+export declare function validateGeneratedOutputField(field: string, configPath: string): string;
+export declare function validateAggregateOutputField(aggregate: {
+    readonly sourceField?: string;
+    readonly operation: RowAggregateOperation;
+    readonly outputField: string;
+}, configPath: string): string;
+export declare function validateGroupByOutputFields(groupByFields: readonly string[], configPath: string): string[];
+export declare function validateCountOutputField(countField: string, configPath: string): string;
+export declare function compareValues(left: JsonValue | undefined, right: JsonValue | undefined): number;
+export declare function containsValue(value: JsonValue | undefined, expected: JsonValue | undefined): boolean;
+export declare function computeAggregate(operation: RowAggregateOperation, rows: readonly JsonObject[], sourceField: string | undefined): JsonValue;
+export declare function readOrNull(row: JsonObject, field: string): JsonValue;
+export declare function isJsonObject(value: JsonValue): value is JsonObject;
+export declare function isFiniteNumber(value: unknown): value is number;
+export declare function sanitizeFieldName(value: string): string;
+export declare function createUniqueOutputField(baseName: string, usedOutputFields: Set<string>): string;
+export declare function stableStringify(value: unknown): string;
+export declare function cloneJsonObject(value: JsonObject): JsonObject;
+export declare function cloneJsonValue(value: JsonValue): JsonValue;

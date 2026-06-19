@@ -1,0 +1,2 @@
+import { NavigationMenuContent as e, NavigationMenuIndicator as t, NavigationMenuItem as n, NavigationMenuLink as r, NavigationMenuList as i, NavigationMenuRoot as a, NavigationMenuSub as o, NavigationMenuTrigger as s, NavigationMenuViewport as c } from "reka-ui";
+export { a as NavigationMenu, e as NavigationMenuContent, t as NavigationMenuIndicator, n as NavigationMenuItem, r as NavigationMenuLink, i as NavigationMenuList, o as NavigationMenuSub, s as NavigationMenuTrigger, c as NavigationMenuViewport };

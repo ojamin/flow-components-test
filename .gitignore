@@ -1,0 +1,11 @@
+# Package-local build and test artifacts. Kept out of the standalone repo
+# so a `git status` from inside the package is clean after running lanes.
+
+# Playwright visual/state regression lane outputs (`npm run test:visual-state`).
+node_modules/
+.tmp/
+dist/.tsbuildinfo
+dist/preview-app/
+preview-app/playwright/.artifacts/
+preview-app/playwright-report/
+preview-app/test-results/

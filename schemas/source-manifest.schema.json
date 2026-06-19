@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://flow-builder.local/schemas/source-manifest.schema.json",
+  "title": "Flow Builder component source manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sourceId",
+    "name",
+    "version",
+    "generatedAt",
+    "components",
+    "groups",
+    "fingerprints"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "sourceId": { "type": "string", "minLength": 1 },
+    "name": { "type": "string", "minLength": 1 },
+    "version": { "type": "string", "minLength": 1 },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "packageName": { "type": "string", "minLength": 1 },
+    "commit": { "type": "string", "minLength": 1 },
+    "components": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/componentSummary" }
+    },
+    "groups": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/groupSummary" }
+    },
+    "fingerprints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["manifestHash", "filesHash"],
+      "properties": {
+        "manifestHash": { "$ref": "#/$defs/sha256" },
+        "filesHash": { "$ref": "#/$defs/sha256" }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "componentId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*(\\.[a-z][a-z0-9-]*)?$"
+    },
+    "groupId": {
+      "type": "string",
+      "enum": ["chart", "content", "data", "layout", "marketing", "transform"]
+    },
+    "localPath": {
+      "type": "string",
+      "minLength": 1,
+      "not": {
+        "anyOf": [{ "pattern": "^/" }, { "pattern": "(^|/)\\.\\.(/|$)" }, { "pattern": "\\\\" }]
+      }
+    },
+    "componentSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "displayName",
+        "group",
+        "source",
+        "sourceId",
+        "version",
+        "renderable",
+        "tags",
+        "sourcePath",
+        "contentHash"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/componentId" },
+        "displayName": { "type": "string", "minLength": 1 },
+        "group": { "$ref": "#/$defs/groupId" },
+        "section": { "type": "string", "minLength": 1 },
+        "source": { "const": "static" },
+        "sourceId": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "renderable": { "type": "boolean" },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "sourcePath": { "$ref": "#/$defs/localPath" },
+        "contentHash": { "$ref": "#/$defs/sha256" },
+        "runtimeRequirements": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "deprecated": { "type": "boolean" },
+        "experimental": { "type": "boolean" }
+      }
+    },
+    "groupSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "displayName", "componentIds"],
+      "properties": {
+        "id": { "$ref": "#/$defs/groupId" },
+        "displayName": { "type": "string", "minLength": 1 },
+        "componentIds": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/componentId" },
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}

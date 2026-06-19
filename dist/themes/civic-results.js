@@ -1,0 +1,77 @@
+var e = {
+	version: 1,
+	id: "civic-results",
+	displayName: "Civic Results",
+	description: "Official election-results palette with navy chrome, muted green result bars, warning red, neutral dividers, and soft public-record surfaces.",
+	properties: {
+		color: {
+			pageBackground: "oklch(0.975 0.006 247)",
+			surface: "oklch(0.998 0.002 247)",
+			cardForeground: "oklch(0.22 0.025 255)",
+			popover: "oklch(0.998 0.002 247)",
+			popoverForeground: "oklch(0.22 0.025 255)",
+			surfaceMuted: "oklch(0.945 0.008 247)",
+			foreground: "oklch(0.22 0.025 255)",
+			foregroundMuted: "oklch(0.46 0.022 255)",
+			border: "oklch(0.84 0.012 247)",
+			accent: "oklch(0.28 0.075 255)",
+			accentForeground: "oklch(0.985 0.006 247)",
+			secondary: "oklch(0.925 0.01 247)",
+			secondaryForeground: "oklch(0.22 0.025 255)",
+			accentSubtle: "oklch(0.9 0.025 150)",
+			accentSubtleForeground: "oklch(0.3 0.08 150)",
+			focusRing: "oklch(0.52 0.13 252)",
+			destructive: "oklch(0.54 0.18 28)",
+			destructiveForeground: "oklch(0.985 0.006 247)",
+			input: "oklch(0.84 0.012 247)",
+			sidebar: "oklch(0.955 0.008 247)",
+			sidebarForeground: "oklch(0.22 0.025 255)",
+			sidebarPrimary: "oklch(0.28 0.075 255)",
+			sidebarPrimaryForeground: "oklch(0.985 0.006 247)",
+			sidebarAccent: "oklch(0.9 0.025 150)",
+			sidebarAccentForeground: "oklch(0.3 0.08 150)",
+			sidebarBorder: "oklch(0.84 0.012 247)",
+			sidebarRing: "oklch(0.52 0.13 252)",
+			warning: "oklch(0.58 0.18 45)",
+			info: "oklch(0.48 0.13 235)",
+			success: "oklch(0.52 0.13 150)",
+			chart1: "oklch(0.32 0.08 255)",
+			chart2: "oklch(0.55 0.12 150)",
+			chart3: "oklch(0.62 0.12 68)",
+			chart4: "oklch(0.48 0.04 255)",
+			chart5: "oklch(0.56 0.16 28)"
+		},
+		font: {
+			body: "Inter, ui-sans-serif, system-ui, sans-serif",
+			heading: "Inter, ui-sans-serif, system-ui, sans-serif",
+			mono: "JetBrains Mono, ui-monospace, SFMono-Regular, monospace"
+		},
+		radius: {
+			none: "0",
+			sm: "0.125rem",
+			md: "0.25rem",
+			lg: "0.375rem",
+			xl: "0.5rem",
+			full: "9999px"
+		},
+		spacing: {
+			none: "0",
+			sm: "0.375rem",
+			md: "0.75rem",
+			lg: "1rem",
+			xl: "1.5rem"
+		},
+		motion: {
+			durationFastMs: 100,
+			durationNormalMs: 180,
+			easing: "cubic-bezier(0.22, 1, 0.36, 1)"
+		},
+		shadow: {
+			sm: "0 1px 2px rgb(15 23 42 / 0.06)",
+			md: "0 6px 18px rgb(15 23 42 / 0.08)",
+			lg: "0 16px 42px rgb(15 23 42 / 0.12)"
+		}
+	}
+};
+//#endregion
+export { e as default };

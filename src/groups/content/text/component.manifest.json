@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "demo.demo-text",
+  "displayName": "Text",
+  "group": "content",
+  "section": "basic",
+  "tags": ["text", "prose", "copy", "paragraph"],
+  "version": "1.0.1",
+  "renderable": true,
+  "responsiveDefaults": { "mobileFullWidth": true },
+  "fixtureVariants": [
+    { "id": "default", "label": "Default copy" },
+    {
+      "id": "empty",
+      "label": "Empty copy",
+      "description": "No text configured or resolved.",
+      "appliesTo": "config"
+    },
+    {
+      "id": "long",
+      "label": "Long copy",
+      "description": "Long prose for wrapping and clamping review.",
+      "appliesTo": "config"
+    }
+  ],
+  "stateSupport": {
+    "empty": true,
+    "loading": { "notApplicable": "Text renders local config or already-resolved input data." },
+    "error": {
+      "notApplicable": "Text has no component-owned async or fallible runtime operation."
+    },
+    "disabled": { "notApplicable": "Text is non-interactive." },
+    "focus": { "notApplicable": "Text exposes no focusable renderer surface." },
+    "keyboard": { "notApplicable": "Text exposes no keyboard interaction." },
+    "responsive": true
+  },
+  "transformKind": "passthrough",
+  "entry": {
+    "definition": "component.ts",
+    "renderer": "Renderer.vue",
+    "configPanel": "ConfigPanel.vue"
+  }
+}

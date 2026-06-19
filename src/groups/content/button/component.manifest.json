@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "demo.demo-button",
+  "displayName": "Button",
+  "group": "content",
+  "section": "basic",
+  "tags": ["cta", "link", "action"],
+  "version": "1.0.0",
+  "renderable": true,
+  "fixtureVariants": [
+    { "id": "default", "label": "Default button" },
+    { "id": "empty", "label": "Missing label", "appliesTo": "config" },
+    { "id": "disabled", "label": "Disabled action", "appliesTo": "config" }
+  ],
+  "stateSupport": {
+    "empty": true,
+    "loading": { "notApplicable": "Button does not perform component-owned async work." },
+    "error": {
+      "notApplicable": "Invalid or missing navigation targets render disabled fallbacks, not error UI."
+    },
+    "disabled": true,
+    "focus": true,
+    "keyboard": true,
+    "responsive": true
+  },
+  "transformKind": "passthrough",
+  "entry": {
+    "definition": "component.ts",
+    "renderer": "Renderer.vue",
+    "configPanel": "ConfigPanel.vue"
+  }
+}

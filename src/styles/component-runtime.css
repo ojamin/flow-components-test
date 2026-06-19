@@ -1,0 +1,273 @@
+/*
+ * @flow-builder/components/styles/component-runtime.css
+ *
+ * Public package runtime CSS surface. Consumers import this from
+ * `@flow-builder/components/styles/component-runtime.css` to get the
+ * Tailwind source-extraction rules, component-theme alias slots, and
+ * package-owned library style bridges needed to render package components
+ * and config panels outside the host app.
+ *
+ * Provides:
+ *   - Tailwind v4 `@source` globs covering package runtime renderers,
+ *     config panels, SDK helpers/component-ui, shared facades, and theme
+ *     files so static `bg-ct-*`, `text-ct-*`, `font-ct-*`, `rounded-ct-*`,
+ *     `p-ct-*`, and `ease-ct-*` utilities used by package renderers are
+ *     extracted into the generated stylesheet.
+ *   - Component-theme alias slots mapped onto the runtime `--ct-*` source
+ *     variables written by the host theme bridge.
+ *   - Package-owned library style bridges for runtime dependencies that
+ *     ship in `package.json` (tw-prose role bridge for content components).
+ *
+ * Does NOT provide:
+ *   - Tailwind engine setup itself (`@import "tailwindcss"`,
+ *     `@plugin "@tailwindcss/typography"`, or animation utility CSS); the
+ *     consumer's CSS entry owns those.
+ *   - App editor chrome (Vue Flow overrides, theme-blue/rose presets, app
+ *     palette tokens, app flow tints). Those remain in the host app's
+ *     CSS entry and are not part of the component package contract.
+ *
+ * Source-glob paths are relative to this file so the same rules apply
+ * whether the file is consumed inside the monorepo or from a packed
+ * `@flow-builder/components` install in a downstream repo.
+ *
+ * Why component-root group globs plus explicit helpers:
+ * package renderers split rendering helpers across many sub-component Vue
+ * files (e.g. `SparklineGridTile.vue`, `SlopeChartLegend.vue`,
+ * `DotPlotChart.vue`, `CrossfilterTablePagination.vue`, `Map*Overlay.vue`).
+ * Component-root globs cover those renderer/config/helper files in source,
+ * built package-relative, and root-host-import layouts without descending
+ * into `tests/` or `fixtures/`, whose negative-assertion strings must never
+ * be fed to the Tailwind extractor.
+ */
+
+@source "../groups/*/*/*.vue";
+@source "../../dist/groups/*/*/*.js";
+@source "../groups/**/component.ts";
+@source "../groups/**/types.ts";
+@source "../groups/**/style-model.ts";
+@source "../groups/**/renderer-visual-model.ts";
+@source inline("pt-14 pt-20");
+@source "../groups/**/transform.ts";
+@source "../groups/**/runtime.ts";
+@source "../groups/**/interactions.ts";
+@source "../groups/**/service-input.ts";
+@source "../groups/**/config-panel-helpers.ts";
+@source "../groups/content/dashboard-command-bar/command-bar-helpers.ts";
+@source "../groups/marketing/enquiry-form/utils/*.ts";
+@source "../groups/marketing/enquiry-form/composables/*.ts";
+@source "../groups/**/theme-binding.ts";
+@source "../groups/**/metadata.ts";
+@source "../groups/**/donut.ts";
+@source "../groups/viz/shared/index.ts";
+@source "../sdk/*.vue";
+@source "../sdk/*.ts";
+@source "../../dist/sdk/*.js";
+@source "../sdk/component-ui/**/*.{ts,vue}";
+@source "../../dist/sdk/component-ui/**/*.js";
+@source "../sdk/runtime-services/*.ts";
+@source "../../dist/sdk/runtime-services/*.js";
+@source "../shared/view-container/index.ts";
+@source "../../dist/shared/view-container/index.js";
+@source "../../dist/groups/marketing/enquiry-form/utils/*.js";
+@source "../../dist/groups/marketing/enquiry-form/composables/*.js";
+@source "../themes/*.ts";
+@source "../../dist/themes/*.js";
+
+/*
+ * Component-theme alias slots (Task 5.4 contract).
+ *
+ * Static Tailwind utility aliases for the runtime-applied
+ * `--ct-{role-group}-{role-key}` slots written by the Theme style bridge
+ * inside `data-ct-scope` blocks. Names mirror the canonical SDK mapping in
+ * `packages/components/src/sdk/theme.ts`; do not invent parallel role
+ * names.
+ *
+ * Renderers must consume these via static utility classes such as
+ * `bg-ct-page-background`, `text-ct-foreground`, `font-ct-body`,
+ * `rounded-ct-md`, `p-ct-md`, and `ease-ct-default`. Inline styles,
+ * arbitrary `var(...)` classes, and renderer-local fallback palettes are
+ * forbidden. The `--ct-*` source slots have no defaults at registration
+ * time; the host bridge supplies values at runtime.
+ */
+@theme {
+  --color-ct-page-background: var(--ct-color-page-background);
+  --color-ct-surface: var(--ct-color-surface);
+  --color-ct-surface-muted: var(--ct-color-surface-muted);
+  --color-ct-card-foreground: var(--ct-color-card-foreground);
+  --color-ct-popover: var(--ct-color-popover);
+  --color-ct-popover-foreground: var(--ct-color-popover-foreground);
+  --color-ct-foreground: var(--ct-color-foreground);
+  --color-ct-foreground-muted: var(--ct-color-foreground-muted);
+  --color-ct-border: var(--ct-color-border);
+  --color-ct-input: var(--ct-color-input);
+  --color-ct-accent: var(--ct-color-accent);
+  --color-ct-accent-foreground: var(--ct-color-accent-foreground);
+  --color-ct-secondary: var(--ct-color-secondary);
+  --color-ct-secondary-foreground: var(--ct-color-secondary-foreground);
+  --color-ct-accent-subtle: var(--ct-color-accent-subtle);
+  --color-ct-accent-subtle-foreground: var(--ct-color-accent-subtle-foreground);
+  --color-ct-focus-ring: var(--ct-color-focus-ring);
+  --color-ct-destructive: var(--ct-color-destructive);
+  --color-ct-destructive-foreground: var(--ct-color-destructive-foreground);
+  --color-ct-warning: var(--ct-color-warning);
+  --color-ct-info: var(--ct-color-info);
+  --color-ct-success: var(--ct-color-success);
+  --color-ct-sidebar: var(--ct-color-sidebar);
+  --color-ct-sidebar-foreground: var(--ct-color-sidebar-foreground);
+  --color-ct-sidebar-primary: var(--ct-color-sidebar-primary);
+  --color-ct-sidebar-primary-foreground: var(--ct-color-sidebar-primary-foreground);
+  --color-ct-sidebar-accent: var(--ct-color-sidebar-accent);
+  --color-ct-sidebar-accent-foreground: var(--ct-color-sidebar-accent-foreground);
+  --color-ct-sidebar-border: var(--ct-color-sidebar-border);
+  --color-ct-sidebar-ring: var(--ct-color-sidebar-ring);
+  --color-ct-chart1: var(--ct-color-chart1);
+  --color-ct-chart2: var(--ct-color-chart2);
+  --color-ct-chart3: var(--ct-color-chart3);
+  --color-ct-chart4: var(--ct-color-chart4);
+  --color-ct-chart5: var(--ct-color-chart5);
+
+  --font-ct-body: var(--ct-font-body);
+  --font-ct-heading: var(--ct-font-heading);
+  --font-ct-mono: var(--ct-font-mono);
+
+  --radius-ct-none: var(--ct-radius-none);
+  --radius-ct-sm: var(--ct-radius-sm);
+  --radius-ct-md: var(--ct-radius-md);
+  --radius-ct-lg: var(--ct-radius-lg);
+  --radius-ct-xl: var(--ct-radius-xl);
+  --radius-ct-full: var(--ct-radius-full);
+
+  --shadow-ct-sm: var(--ct-shadow-sm);
+  --shadow-ct-md: var(--ct-shadow-md);
+  --shadow-ct-lg: var(--ct-shadow-lg);
+
+  --spacing-ct-none: var(--ct-spacing-none);
+  --spacing-ct-sm: var(--ct-spacing-sm);
+  --spacing-ct-md: var(--ct-spacing-md);
+  --spacing-ct-lg: var(--ct-spacing-lg);
+  --spacing-ct-xl: var(--ct-spacing-xl);
+
+  /*
+   * Motion easing maps to Tailwind's `--ease-*` namespace so renderers can
+   * apply the static `ease-ct-default` utility. Component-theme durations
+   * (`--ct-motion-duration-fast-ms`, `--ct-motion-duration-normal-ms`) have
+   * no Tailwind v4 semantic-name namespace; renderers must compose
+   * theme-driven durations through approved utilities or shared transition
+   * helpers, never arbitrary `duration-[var(...)]`.
+   */
+  --ease-ct-default: var(--ct-motion-easing);
+}
+
+/*
+ * @tailwindcss/typography (`.prose`) integration with component-theme
+ * roles. The typography plugin styles prose-rendered HTML using its own
+ * `--tw-prose-*` CSS custom properties. Inside a `data-ct-scope` block we
+ * remap those slot variables to the inherited `--ct-color-*` roles so
+ * markdown bodies, headings, links, code, quotes, dividers, and table
+ * borders adapt to the active component theme without `dark:prose-invert`
+ * (which is OS color-scheme based, not component-theme based).
+ *
+ * The plugin itself is expected to be loaded by the consumer's CSS entry;
+ * these rules are inert if `.prose` is never rendered.
+ */
+[data-ct-scope] .prose {
+  --tw-prose-body: var(--color-ct-foreground);
+  --tw-prose-headings: var(--color-ct-foreground);
+  --tw-prose-lead: var(--color-ct-foreground-muted);
+  --tw-prose-links: var(--color-ct-accent);
+  --tw-prose-bold: var(--color-ct-foreground);
+  --tw-prose-counters: var(--color-ct-foreground-muted);
+  --tw-prose-bullets: var(--color-ct-foreground-muted);
+  --tw-prose-hr: var(--color-ct-border);
+  --tw-prose-quotes: var(--color-ct-foreground);
+  --tw-prose-quote-borders: var(--color-ct-border);
+  --tw-prose-captions: var(--color-ct-foreground-muted);
+  --tw-prose-kbd: var(--color-ct-foreground);
+  --tw-prose-kbd-shadows: var(--color-ct-border);
+  --tw-prose-code: var(--color-ct-foreground);
+  --tw-prose-pre-code: var(--color-ct-foreground);
+  --tw-prose-pre-bg: var(--color-ct-surface-muted);
+  --tw-prose-th-borders: var(--color-ct-border);
+  --tw-prose-td-borders: var(--color-ct-border);
+  /*
+   * Invert slots intentionally mirror the same theme roles so any prose
+   * subtree that still carries `prose-invert` inherits theme-driven color
+   * rather than OS dark palette.
+   */
+  --tw-prose-invert-body: var(--color-ct-foreground);
+  --tw-prose-invert-headings: var(--color-ct-foreground);
+  --tw-prose-invert-lead: var(--color-ct-foreground-muted);
+  --tw-prose-invert-links: var(--color-ct-accent);
+  --tw-prose-invert-bold: var(--color-ct-foreground);
+  --tw-prose-invert-counters: var(--color-ct-foreground-muted);
+  --tw-prose-invert-bullets: var(--color-ct-foreground-muted);
+  --tw-prose-invert-hr: var(--color-ct-border);
+  --tw-prose-invert-quotes: var(--color-ct-foreground);
+  --tw-prose-invert-quote-borders: var(--color-ct-border);
+  --tw-prose-invert-captions: var(--color-ct-foreground-muted);
+  --tw-prose-invert-kbd: var(--color-ct-foreground);
+  --tw-prose-invert-kbd-shadows: var(--color-ct-border);
+  --tw-prose-invert-code: var(--color-ct-foreground);
+  --tw-prose-invert-pre-code: var(--color-ct-foreground);
+  --tw-prose-invert-pre-bg: var(--color-ct-surface-muted);
+  --tw-prose-invert-th-borders: var(--color-ct-border);
+  --tw-prose-invert-td-borders: var(--color-ct-border);
+}
+
+[data-ct-scope] .prose :where(kbd):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  background-color: var(--color-ct-surface);
+}
+
+/*
+ * MapLibre vmap1 canvas container fill.
+ *
+ * MapLibre's bundled stylesheet sets `position: relative` on `.maplibregl-map`,
+ * which collides with the Tailwind `absolute inset-0` utilities the vmap1
+ * renderer applies to the same div (the renderer hands MapLibre a single
+ * element that ends up carrying both classes). Because the MapLibre CSS is
+ * imported above, its `position: relative` wins and the container collapses
+ * to 0 height — the WebGL canvas paints, but nothing is laid out, so the map
+ * and its controls are invisible.
+ *
+ * Restore `position: absolute` and re-assert `inset: 0` for the vmap1 map
+ * canvas only. Selector specificity (0,2,0) beats MapLibre's `.maplibregl-map`
+ * (0,1,0); the rule is scoped to the renderer's semantic data attribute so
+ * other MapLibre mounts elsewhere in a consumer app are unaffected.
+ */
+[data-vmap1-map-canvas].maplibregl-map {
+  position: absolute;
+  inset: 0;
+}
+
+/*
+ * vmap1 MapLibre control accessibility + narrow-placement hardening.
+ *
+ * Standard MapLibre controls (NavigationControl etc.) attach inside the same
+ * canvas div the renderer marks with `data-vmap1-map-canvas`. Default
+ * MapLibre control margins/group sizes can overlap each other or push past
+ * the canvas in narrow Builder/Preview placements (mobile preview, side-rail
+ * embeds, two-column layouts). The controller tags the navigation control
+ * container with `data-vmap1-map-control="navigation"` so these rules scope
+ * to vmap1-managed controls and do not affect any other MapLibre mount.
+ *
+ * Rules are placement-safe (no @media): they clamp control size, compact
+ * group margins, and provide a design-system focus ring for keyboard users.
+ */
+[data-vmap1-map-canvas] .maplibregl-ctrl {
+  max-width: calc(100% - 0.5rem);
+  max-height: calc(100% - 0.5rem);
+  box-sizing: border-box;
+}
+
+[data-vmap1-map-canvas] .maplibregl-ctrl-group {
+  margin: 6px;
+}
+
+[data-vmap1-map-canvas] .maplibregl-ctrl-group:not(:empty) {
+  border-color: var(--border);
+}
+
+[data-vmap1-map-canvas] .maplibregl-ctrl button:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}

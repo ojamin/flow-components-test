@@ -1,0 +1,274 @@
+/*
+ * Preview-app-local Tailwind/palette entry.
+ *
+ * Owns the Tailwind v4 engine setup, the shadcn-compatible semantic token
+ * aliases, and the light/dark palette values used by the preview shell
+ * (App.vue, routes/*, components/*). The package's public runtime CSS
+ * (`@flow-builder/components/styles/component-runtime.css`) is layered on
+ * top of this file and intentionally stays palette-agnostic; it only
+ * provides component-theme alias slots, package source globs, and
+ * library style bridges.
+ *
+ * This file is preview-app-internal. It must not be exported from the
+ * package and the package must not import it.
+ *
+ * Token values are copied (not imported) from the host app
+ * (`src/styles/tailwind.css`) so the standalone preview keeps the same
+ * visual language without depending on the host app's CSS or Tailwind
+ * config.
+ *
+ * No remote CSS imports are loaded from this file. The preview app is
+ * consumed in air-gapped CI runs, downstream forks, and the in-monorepo
+ * `npm run preview:build` workspace target; live font fetches from a
+ * third-party font CDN would leak the visitor IP/User-Agent on every
+ * preview open and would flake any offline build. The `--font-sans`
+ * stack below prefers a locally installed Geist variable face when
+ * contributors have one and otherwise falls back to a robust system UI
+ * font stack.
+ */
+
+/*
+ * Disable Tailwind v4 auto source detection so only the explicit
+ * `@source` globs below feed the class extractor. The Tailwind v4 vite
+ * plugin only honors `@source` declarations inside the CSS file that
+ * loads the engine via `@import "tailwindcss"` — sibling CSS modules
+ * imported through JS (`main.ts` imports `component-runtime.css`) carry
+ * their own `@source` lines but those are silently dropped, so the
+ * package renderer's `bg-ct-*` / `text-ct-*` / `border-ct-*` utilities
+ * were not extracted into this app's CSS bundle and matrix renderers
+ * painted as unstyled (transparent background, inherited dark text on
+ * dark cells). Mirror the host-app tailwind.css pattern by declaring
+ * the package source paths inline here.
+ */
+@import "tailwindcss" source(none);
+@plugin "@tailwindcss/typography";
+@import "tw-animate-css";
+@import "shadcn-vue/tailwind.css";
+
+@source "../**/*.{ts,vue}";
+
+/*
+ * Package runtime source paths. Mirrors `component-runtime.css` source
+ * globs (which Tailwind v4 will not pick up because that file is loaded
+ * via JS and lacks `@import "tailwindcss"`). Paths are relative to this
+ * file: `../../../src/...` reaches `packages/components/src/...` from
+ * `packages/components/preview-app/src/styles/`. Globs are kept narrow
+ * to avoid feeding package test fixtures (negative-assertion strings
+ * like `rounded-[var(--ct-radius-...)]`) into the extractor.
+ */
+@source "../../../src/groups/**/*.vue";
+@source "../../../src/groups/**/component.ts";
+@source "../../../src/groups/**/types.ts";
+@source "../../../src/groups/**/style-model.ts";
+@source "../../../src/groups/**/renderer-visual-model.ts";
+@source inline("pt-14 pt-20");
+@source "../../../src/groups/**/transform.ts";
+@source "../../../src/groups/**/runtime.ts";
+@source "../../../src/groups/**/interactions.ts";
+@source "../../../src/groups/**/service-input.ts";
+@source "../../../src/groups/**/config-panel-helpers.ts";
+@source "../../../src/groups/content/dashboard-command-bar/command-bar-helpers.ts";
+@source "../../../src/groups/**/theme-binding.ts";
+@source "../../../src/groups/**/metadata.ts";
+@source "../../../src/groups/**/donut.ts";
+@source "../../../src/groups/viz/shared/index.ts";
+@source "../../../src/sdk/*.vue";
+@source "../../../src/sdk/*.ts";
+@source "../../../src/sdk/component-ui/**/*.{ts,vue}";
+@source "../../../src/sdk/runtime-services/*.ts";
+@source "../../../src/shared/view-container/index.ts";
+@source "../../../src/themes/*.ts";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Component-theme alias slots. Mirrors the public `component-runtime.css`
+ * contract but is declared inside the entry CSS that loads the Tailwind
+ * engine so the package renderer utilities (`bg-ct-accent`,
+ * `text-ct-foreground-muted`, `border-ct-border`, etc.) actually resolve
+ * against `--color-ct-*` and get emitted. Host bridge color values flow
+ * through raw HSL-channel `--ct-color-*` slots (set on `[data-ct-scope]`
+ * blocks) plus format-safe `--color-ct-*` aliases; this layer exposes the
+ * latter so OKLCH, hex, and HSL-channel values all produce usable Tailwind
+ * color utilities.
+ */
+@theme {
+  --color-ct-page-background: var(--ct-color-page-background);
+  --color-ct-surface: var(--ct-color-surface);
+  --color-ct-surface-muted: var(--ct-color-surface-muted);
+  --color-ct-card-foreground: var(--ct-color-card-foreground);
+  --color-ct-popover: var(--ct-color-popover);
+  --color-ct-popover-foreground: var(--ct-color-popover-foreground);
+  --color-ct-foreground: var(--ct-color-foreground);
+  --color-ct-foreground-muted: var(--ct-color-foreground-muted);
+  --color-ct-border: var(--ct-color-border);
+  --color-ct-input: var(--ct-color-input);
+  --color-ct-accent: var(--ct-color-accent);
+  --color-ct-accent-foreground: var(--ct-color-accent-foreground);
+  --color-ct-secondary: var(--ct-color-secondary);
+  --color-ct-secondary-foreground: var(--ct-color-secondary-foreground);
+  --color-ct-accent-subtle: var(--ct-color-accent-subtle);
+  --color-ct-accent-subtle-foreground: var(--ct-color-accent-subtle-foreground);
+  --color-ct-focus-ring: var(--ct-color-focus-ring);
+  --color-ct-destructive: var(--ct-color-destructive);
+  --color-ct-destructive-foreground: var(--ct-color-destructive-foreground);
+  --color-ct-warning: var(--ct-color-warning);
+  --color-ct-info: var(--ct-color-info);
+  --color-ct-success: var(--ct-color-success);
+  --color-ct-sidebar: var(--ct-color-sidebar);
+  --color-ct-sidebar-foreground: var(--ct-color-sidebar-foreground);
+  --color-ct-sidebar-primary: var(--ct-color-sidebar-primary);
+  --color-ct-sidebar-primary-foreground: var(--ct-color-sidebar-primary-foreground);
+  --color-ct-sidebar-accent: var(--ct-color-sidebar-accent);
+  --color-ct-sidebar-accent-foreground: var(--ct-color-sidebar-accent-foreground);
+  --color-ct-sidebar-border: var(--ct-color-sidebar-border);
+  --color-ct-sidebar-ring: var(--ct-color-sidebar-ring);
+  --color-ct-chart1: var(--ct-color-chart1);
+  --color-ct-chart2: var(--ct-color-chart2);
+  --color-ct-chart3: var(--ct-color-chart3);
+  --color-ct-chart4: var(--ct-color-chart4);
+  --color-ct-chart5: var(--ct-color-chart5);
+
+  --font-ct-body: var(--ct-font-body);
+  --font-ct-heading: var(--ct-font-heading);
+  --font-ct-mono: var(--ct-font-mono);
+
+  --radius-ct-none: var(--ct-radius-none);
+  --radius-ct-sm: var(--ct-radius-sm);
+  --radius-ct-md: var(--ct-radius-md);
+  --radius-ct-lg: var(--ct-radius-lg);
+  --radius-ct-xl: var(--ct-radius-xl);
+  --radius-ct-full: var(--ct-radius-full);
+
+  --shadow-ct-sm: var(--ct-shadow-sm);
+  --shadow-ct-md: var(--ct-shadow-md);
+  --shadow-ct-lg: var(--ct-shadow-lg);
+
+  --spacing-ct-none: var(--ct-spacing-none);
+  --spacing-ct-sm: var(--ct-spacing-sm);
+  --spacing-ct-md: var(--ct-spacing-md);
+  --spacing-ct-lg: var(--ct-spacing-lg);
+  --spacing-ct-xl: var(--ct-spacing-xl);
+
+  --ease-ct-default: var(--ct-motion-easing);
+}
+
+@theme inline {
+  --font-sans:
+    "Geist Variable", "Geist", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji";
+  --font-heading: var(--font-sans);
+  /*
+   * Global semantic monospace alias for preview shell surfaces that need
+   * monospace outside a renderer placement scope. `font-ct-mono` is
+   * renderer-only (requires `data-ct-scope` ancestor).
+   */
+  --font-code: var(--font-mono);
+
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+  --color-success: var(--success);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --color-overlay: var(--overlay);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --overlay: oklch(0.08 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --warning: oklch(0.555 0.163 65.5);
+  --info: oklch(0.488 0.243 264.376);
+  --success: oklch(0.56 0.14 155);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.985 0 0);
+  --warning: oklch(0.828 0.152 84.071);
+  --info: oklch(0.707 0.165 254.624);
+  --success: oklch(0.72 0.15 155);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    @apply font-sans;
+  }
+}

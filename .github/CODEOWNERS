@@ -1,0 +1,52 @@
+# Future private component repository CODEOWNERS.
+# These paths are written for the standalone flow-builder-components repository root.
+# Maintainer review is required because component code, scripts, dependencies,
+# generated manifests, and runtime CSS can affect executable app/runtime behavior.
+
+# Fallback maintainers for all package changes.
+* @flow-builder/component-library-maintainers
+
+# Component source, manifests, fixtures, transforms, renderers, config panels, and tests.
+/src/groups/** @flow-builder/component-library-maintainers
+
+# Public SDK contracts, helper facades, runtime-service facades, shared package APIs, and package entrypoints.
+/src/sdk/** @flow-builder/component-library-maintainers
+/src/shared/** @flow-builder/component-library-maintainers
+/src/testing/** @flow-builder/component-library-maintainers
+/src/index.ts @flow-builder/component-library-maintainers
+/src/manifest.ts @flow-builder/component-library-maintainers
+
+# Themes and runtime CSS that can change component rendering in preview, app runtime, or static export.
+/src/themes/** @flow-builder/component-library-maintainers
+/src/styles/** @flow-builder/component-library-maintainers
+/tailwind.config.* @flow-builder/component-library-maintainers
+
+# Generated manifests and catalogs must be reviewed for source drift and app compatibility.
+/src/generated/** @flow-builder/component-library-maintainers
+
+# Tooling, generators, validation, scaffolders, and lifecycle-adjacent scripts.
+/scripts/** @flow-builder/component-library-maintainers
+
+# Package metadata, dependency lockfiles, package manager pins, and lifecycle scripts.
+/package.json @flow-builder/component-library-maintainers
+/package-lock.json @flow-builder/component-library-maintainers
+/npm-shrinkwrap.json @flow-builder/component-library-maintainers
+/.npmrc @flow-builder/component-library-maintainers
+
+# Build, test, and type configuration.
+/tsconfig*.json @flow-builder/component-library-maintainers
+/vite.config.* @flow-builder/component-library-maintainers
+/vitest.config.* @flow-builder/component-library-maintainers
+/eslint.config.* @flow-builder/component-library-maintainers
+
+# CI workflows and pull request policy.
+/.github/** @flow-builder/component-library-maintainers
+
+# Preview app and preview runtime surfaces used for component readiness proof.
+/preview-app/** @flow-builder/component-library-maintainers
+
+# Package documentation, release notes, and contributor guidance.
+/docs/** @flow-builder/component-library-maintainers
+/README.md @flow-builder/component-library-maintainers
+/CONTRIBUTING.md @flow-builder/component-library-maintainers
+/CHANGELOG.md @flow-builder/component-library-maintainers

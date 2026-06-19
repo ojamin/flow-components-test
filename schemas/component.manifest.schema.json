@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://flow-builder.local/schemas/component.manifest.schema.json",
+  "title": "Flow Builder component manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "displayName",
+    "group",
+    "tags",
+    "version",
+    "renderable",
+    "entry"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*(\\.[a-z][a-z0-9-]*)?$"
+    },
+    "displayName": { "type": "string", "minLength": 1 },
+    "group": {
+      "type": "string",
+      "enum": ["chart", "content", "data", "layout", "marketing", "transform"]
+    },
+    "section": { "type": "string", "minLength": 1 },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "version": { "type": "string", "minLength": 1 },
+    "renderable": { "type": "boolean" },
+    "transformKind": {
+      "type": "string",
+      "enum": ["module", "passthrough"],
+      "default": "module"
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["definition", "renderer", "configPanel"],
+      "properties": {
+        "definition": { "$ref": "#/$defs/localPath" },
+        "renderer": { "$ref": "#/$defs/localPath" },
+        "configPanel": { "$ref": "#/$defs/localPath" },
+        "transform": { "$ref": "#/$defs/localPath" }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "transformKind": { "const": "passthrough" } },
+        "required": ["transformKind"]
+      },
+      "then": {
+        "properties": {
+          "entry": { "not": { "required": ["transform"] } }
+        }
+      }
+    },
+    {
+      "if": {
+        "anyOf": [
+          {
+            "properties": { "transformKind": { "const": "module" } },
+            "required": ["transformKind"]
+          },
+          { "not": { "required": ["transformKind"] } }
+        ]
+      },
+      "then": {
+        "properties": {
+          "entry": { "required": ["transform"] }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "localPath": {
+      "type": "string",
+      "minLength": 1,
+      "not": {
+        "anyOf": [{ "pattern": "^/" }, { "pattern": "(^|/)\\.\\.(/|$)" }, { "pattern": "\\\\" }]
+      }
+    }
+  }
+}
