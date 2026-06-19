@@ -35,7 +35,7 @@ export const staticComponentPackageCatalog = {
       title: "Button",
       description: demo_demo_buttonDefinition.description,
       source: "static",
-      sourceId: "flow-components-test",
+      sourceId: "flow-components-test-newsnight",
     },
     {
       id: "demo.demo-text",
@@ -43,7 +43,7 @@ export const staticComponentPackageCatalog = {
       title: "Text",
       description: demo_demo_textDefinition.description,
       source: "static",
-      sourceId: "flow-components-test",
+      sourceId: "flow-components-test-newsnight",
     },
     {
       id: "content.newsnight-lower-third",
@@ -51,7 +51,7 @@ export const staticComponentPackageCatalog = {
       title: "Newsnight Lower Third",
       description: content_newsnight_lower_thirdDefinition.description,
       source: "static",
-      sourceId: "flow-components-test",
+      sourceId: "flow-components-test-newsnight",
     },
     {
       id: "content.newsnight-masthead",
@@ -59,7 +59,7 @@ export const staticComponentPackageCatalog = {
       title: "Newsnight Masthead",
       description: content_newsnight_mastheadDefinition.description,
       source: "static",
-      sourceId: "flow-components-test",
+      sourceId: "flow-components-test-newsnight",
     },
     {
       id: "content.newsnight-results-wall",
@@ -67,7 +67,7 @@ export const staticComponentPackageCatalog = {
       title: "Newsnight Results Wall",
       description: content_newsnight_results_wallDefinition.description,
       source: "static",
-      sourceId: "flow-components-test",
+      sourceId: "flow-components-test-newsnight",
     },
     {
       id: "content.status-badge",
@@ -75,7 +75,7 @@ export const staticComponentPackageCatalog = {
       title: "Status Badge",
       description: content_status_badgeDefinition.description,
       source: "static",
-      sourceId: "flow-components-test",
+      sourceId: "flow-components-test-newsnight",
     },
   ],
   definitions: staticComponentDefinitions as readonly AnyComponentDefinition[],

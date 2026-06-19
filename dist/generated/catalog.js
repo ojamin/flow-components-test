@@ -21,7 +21,7 @@ var o = [
 			title: "Button",
 			description: e.description,
 			source: "static",
-			sourceId: "flow-components-test"
+			sourceId: "flow-components-test-newsnight"
 		},
 		{
 			id: "demo.demo-text",
@@ -29,7 +29,7 @@ var o = [
 			title: "Text",
 			description: t.description,
 			source: "static",
-			sourceId: "flow-components-test"
+			sourceId: "flow-components-test-newsnight"
 		},
 		{
 			id: "content.newsnight-lower-third",
@@ -37,7 +37,7 @@ var o = [
 			title: "Newsnight Lower Third",
 			description: n.description,
 			source: "static",
-			sourceId: "flow-components-test"
+			sourceId: "flow-components-test-newsnight"
 		},
 		{
 			id: "content.newsnight-masthead",
@@ -45,7 +45,7 @@ var o = [
 			title: "Newsnight Masthead",
 			description: r.description,
 			source: "static",
-			sourceId: "flow-components-test"
+			sourceId: "flow-components-test-newsnight"
 		},
 		{
 			id: "content.newsnight-results-wall",
@@ -53,7 +53,7 @@ var o = [
 			title: "Newsnight Results Wall",
 			description: i.description,
 			source: "static",
-			sourceId: "flow-components-test"
+			sourceId: "flow-components-test-newsnight"
 		},
 		{
 			id: "content.status-badge",
@@ -61,7 +61,7 @@ var o = [
 			title: "Status Badge",
 			description: a.description,
 			source: "static",
-			sourceId: "flow-components-test"
+			sourceId: "flow-components-test-newsnight"
 		}
 	],
 	definitions: o

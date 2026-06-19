@@ -1,7 +1,7 @@
 //#region src/generated/source-manifest.ts
 var e = {
 	schemaVersion: 1,
-	sourceId: "flow-components-test",
+	sourceId: "flow-components-test-newsnight",
 	name: "Flow Components Test",
 	version: "0.5.0",
 	generatedAt: "1970-01-01T00:00:00.000Z",
@@ -13,7 +13,7 @@ var e = {
 			group: "content",
 			section: "basic",
 			source: "static",
-			sourceId: "flow-components-test",
+			sourceId: "flow-components-test-newsnight",
 			version: "1.0.0",
 			renderable: !0,
 			tags: [
@@ -55,7 +55,7 @@ var e = {
 			group: "content",
 			section: "basic",
 			source: "static",
-			sourceId: "flow-components-test",
+			sourceId: "flow-components-test-newsnight",
 			version: "1.0.1",
 			renderable: !0,
 			tags: [
@@ -101,7 +101,7 @@ var e = {
 			group: "content",
 			section: "custom",
 			source: "static",
-			sourceId: "flow-components-test",
+			sourceId: "flow-components-test-newsnight",
 			version: "1.0.0",
 			renderable: !0,
 			tags: [
@@ -133,7 +133,7 @@ var e = {
 			group: "content",
 			section: "custom",
 			source: "static",
-			sourceId: "flow-components-test",
+			sourceId: "flow-components-test-newsnight",
 			version: "1.0.0",
 			renderable: !0,
 			tags: [
@@ -165,7 +165,7 @@ var e = {
 			group: "content",
 			section: "custom",
 			source: "static",
-			sourceId: "flow-components-test",
+			sourceId: "flow-components-test-newsnight",
 			version: "1.0.0",
 			renderable: !0,
 			tags: [
@@ -198,7 +198,7 @@ var e = {
 			group: "content",
 			section: "custom",
 			source: "static",
-			sourceId: "flow-components-test",
+			sourceId: "flow-components-test-newsnight",
 			version: "1.0.0",
 			renderable: !0,
 			tags: [
