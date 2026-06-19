@@ -85,6 +85,49 @@ export declare const staticComponentSourceManifest: {
             };
             responsive: true;
         };
+    } | {
+        id: string;
+        displayName: string;
+        group: "content";
+        section: string;
+        source: "static";
+        sourceId: string;
+        version: string;
+        renderable: true;
+        tags: string[];
+        sourcePath: string;
+        contentHash: string;
+        fixtureVariants: ({
+            id: string;
+            label: string;
+            description?: undefined;
+            appliesTo?: undefined;
+        } | {
+            id: string;
+            label: string;
+            description: string;
+            appliesTo: "config";
+        })[];
+        stateSupport: {
+            empty: true;
+            loading: {
+                notApplicable: string;
+            };
+            error: {
+                notApplicable: string;
+            };
+            disabled: {
+                notApplicable: string;
+            };
+            focus: {
+                notApplicable: string;
+            };
+            keyboard: {
+                notApplicable: string;
+            };
+            responsive: true;
+        };
+        responsiveDefaults?: undefined;
     })[];
     groups: {
         id: "content";

@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "content.status-badge",
+  "displayName": "Status Badge",
+  "group": "content",
+  "section": "custom",
+  "tags": [
+    "content",
+    "status-badge",
+    "status",
+    "health"
+  ],
+  "version": "1.0.0",
+  "renderable": true,
+  "fixtureVariants": [
+    {
+      "id": "default",
+      "label": "Default status"
+    },
+    {
+      "id": "empty",
+      "label": "Missing status copy",
+      "description": "Label and value are both empty.",
+      "appliesTo": "config"
+    },
+    {
+      "id": "warning",
+      "label": "Warning tone",
+      "description": "Operational warning state.",
+      "appliesTo": "config"
+    }
+  ],
+  "stateSupport": {
+    "empty": true,
+    "loading": {
+      "notApplicable": "Status Badge renders already-resolved config and input data."
+    },
+    "error": {
+      "notApplicable": "Status Badge has no component-owned fallible runtime operation."
+    },
+    "disabled": {
+      "notApplicable": "Status Badge is non-interactive."
+    },
+    "focus": {
+      "notApplicable": "Status Badge exposes no focusable renderer surface."
+    },
+    "keyboard": {
+      "notApplicable": "Status Badge exposes no keyboard interaction."
+    },
+    "responsive": true
+  },
+  "transformKind": "passthrough",
+  "entry": {
+    "definition": "component.ts",
+    "renderer": "Renderer.vue",
+    "configPanel": "ConfigPanel.vue"
+  }
+}

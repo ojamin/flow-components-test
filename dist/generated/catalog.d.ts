@@ -44,6 +44,19 @@ export declare const staticComponentDefinitions: readonly [ComponentDefinition<i
         5: "5";
         6: "6";
     }>>;
+}, import("zod/v4/core").$strip>>, ComponentDefinition<import("zod").ZodObject<{
+    label: import("zod").ZodDefault<import("zod").ZodString>;
+    value: import("zod").ZodDefault<import("zod").ZodString>;
+    tone: import("zod").ZodDefault<import("zod").ZodEnum<{
+        success: "success";
+        warning: "warning";
+        neutral: "neutral";
+        danger: "danger";
+    }>>;
+    size: import("zod").ZodDefault<import("zod").ZodEnum<{
+        sm: "sm";
+        md: "md";
+    }>>;
 }, import("zod/v4/core").$strip>>];
 export declare const staticComponentPackageCatalog: {
     groups: readonly ["content"];

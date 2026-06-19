@@ -36,6 +36,7 @@ npm run build
 ## Demo components
 
 - `src/groups/content/button/` — `demo.demo-button`, an interactive button demo with event/output patterns.
+- `src/groups/content/status-badge/` — `content.status-badge`, a compact status badge test component with bindable label/value config.
 - `src/groups/content/text/` — `demo.demo-text`, a simple passthrough text demo.
 
 Folder names stay under the `content` group because the current manifest schema uses package groups separately from component IDs.

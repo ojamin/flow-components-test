@@ -2,6 +2,7 @@ import { staticComponentSourceManifest as e } from "../generated/source-manifest
 //#region src/testing/component-lookup.ts
 var t = /* @__PURE__ */ Object.assign({
 	"../groups/content/button/component.ts": () => import("../groups/content/button/component.js"),
+	"../groups/content/status-badge/component.ts": () => import("../groups/content/status-badge/component.js"),
 	"../groups/content/text/component.ts": () => import("../groups/content/text/component.js")
 });
 function n(t) {

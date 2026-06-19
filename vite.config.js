@@ -30,6 +30,20 @@ const libraryEntries = {
 
 const packageExternalPattern = /^(?!@flow-builder\/components(?:\/|$))(?:@[^/]+\/[^/]+|[^./][^/]*)/;
 
+function isPackageExternal(id) {
+  if (
+    id.startsWith(".") ||
+    id.startsWith("/") ||
+    id.startsWith("\0") ||
+    id.includes("\\") ||
+    /^[A-Za-z]:/.test(id)
+  ) {
+    return false;
+  }
+
+  return packageExternalPattern.test(id);
+}
+
 export default defineConfig({
   logLevel: "silent",
   plugins: [vue(), tailwindcss()],
@@ -46,7 +60,7 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: (id) => packageExternalPattern.test(id),
+      external: isPackageExternal,
       output: {
         preserveModules: true,
         preserveModulesRoot: "src",
